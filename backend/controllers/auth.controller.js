@@ -10,7 +10,7 @@ export const signup = async (req,res) => {
         }
         const user = await User.findOne({userName});
         if (user) {
-            res.status(400).json({error:"Username already exists"})       
+            return res.status(400).json({error:"Username already exists"})       
         }
         //Hash Password here
         const salt = await bcrypt.genSalt(10);

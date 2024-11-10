@@ -6,7 +6,7 @@ const TextInput = (props) => {
       </label>
       <input
         type={props.type}
-        placeholder={props.placeholder}
+        placeholder={props.placeholder} value={props.value} onChange={props.onChange}
         className="w-full input input-bordered h-10"
       />
     </div>
