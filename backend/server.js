@@ -6,10 +6,10 @@ import authRoutes from './routes/auth.routes.js'
 import messageRoutes from './routes/message.routes.js'
 import userRoutes from './routes/user.routes.js'
 import connectToMongDB from "./db/connectToMongoDB.js";
-
+import { app, server } from "./socket/socket.js";
 config();
 const PORT= process.env.PORT || 5001;
-const app = express();
+
 app.use(express.json()); // to parse json payload
 app.use(cookieParser()); // to parse cookies
 
@@ -23,7 +23,7 @@ app.get("/",(req,res)=>{
 })
 
 
-app.listen(PORT, ()=>{
+server.listen(PORT, ()=>{
     console.log(`Server running on port ${PORT}`);
     connectToMongDB();
 });

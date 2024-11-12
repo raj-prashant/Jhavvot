@@ -10,6 +10,8 @@ const Message = ({message}) => {
   const profilePic=fromMe?authUser.profilePic:selectedConversation.profilePic;
   const bubbleBgColor = fromMe?'bg-blue-500':"";
   const formattedTime = extractTime(message.createdAt)
+  console.log(message.createdAt);
+  
   return (
     <div className={`chat ${chatClassName} `}>
     <div className='chat-image avatar'>
