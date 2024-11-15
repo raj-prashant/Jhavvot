@@ -8,9 +8,8 @@ const Message = ({message}) => {
   const fromMe = message.senderId === authUser._id;
   const chatClassName = fromMe?"chat-end":"chat-start";
   const profilePic=fromMe?authUser.profilePic:selectedConversation.profilePic;
-  const bubbleBgColor = fromMe?'bg-blue-500':"";
+  const bubbleBgColor = fromMe?'bg-yellow-500':"bg-purple-200";
   const formattedTime = extractTime(message.createdAt)
-  console.log(message.createdAt);
   
   return (
     <div className={`chat ${chatClassName} `}>
@@ -19,7 +18,7 @@ const Message = ({message}) => {
         <img src={profilePic} alt="Sender Avatar" />
         </div>
     </div>
-    <div className={`chat-bubble text-white ${bubbleBgColor} pb-2`}>
+    <div className={`chat-bubble text-purple-700 ${bubbleBgColor} pb-2`}>
     {message.message} 
     </div>
     <div className='chat-footer opacity-50 text-xs flex gap-1 item-center '>
