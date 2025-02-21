@@ -1,5 +1,7 @@
+import mongoose from "mongoose";
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import User from "../models/user.model.js";
 import { getRecieverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage= async (req,res)=>{
@@ -7,7 +9,13 @@ export const sendMessage= async (req,res)=>{
         const {message} = req.body;
         const {id:receiverId}= req.params;
         const senderId= req.user._id;
-
+                if (!mongoose.Types.ObjectId.isValid(receiverId)) {
+            return res.status(400).json({ error: "Invalid receiver ID format" });
+        }
+        const isReceiverIdValid = await User.findById(receiverId)||false
+        if (!isReceiverIdValid) {
+            return res.status(404).json({error:"user not found"})
+        }
         let conversation= await Conversation.findOne({
             participants:{$all:[senderId,receiverId]}
         })
