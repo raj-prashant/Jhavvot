@@ -12,10 +12,7 @@ const Login = () => {
   const {loading,login}= useLogin();
   const handleSubmit= async (e)=>{
     e.preventDefault();
-    console.log(inputs);
     await login(inputs)
-
-    
   }
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">

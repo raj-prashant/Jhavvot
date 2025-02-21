@@ -4,7 +4,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
-  const{authUser,setAuthUser}=useAuthContext();
+  const {setAuthUser}=useAuthContext();
 
   const login = async ({ userName, password}) => {
     const sucess = handleInputErrors({userName, password})
@@ -19,19 +19,17 @@ const useLogin = () => {
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);
-        
       }
-      //localstorage
-      localStorage.setItem("jhavvot-user",JSON.stringify(data))
       //context
       setAuthUser(data);
-
+      //localstorage
+      localStorage.setItem("jhavvot-user",JSON.stringify(data))
     } catch (error) {
       toast.error(error.message)
+      console.log(error);
     }
     finally {
       setLoading(false);
-
     }
   }
 
